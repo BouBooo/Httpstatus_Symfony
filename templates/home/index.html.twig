@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Httpstatus{% endblock %}
+
+{% block body %}
+<div class="container">
+<div class="head text-center">
+	<h1> Home page </h1>
+	<h3> Votre site de monitoring en ligne </h3>
+</div>
+
+<div id="conteneur">
+    {% for status in status %}
+    <div class="element">
+        <div class="card bg-success  text-white mb-3 website-card">
+			<div class="card-header website-card-title">
+			<h4></h4>
+			<h5><a target="_blank" href="#">{{ status.website.name }}</a></h5>
+			<div class="card-body">
+			<div class="website-card-code">
+                HTTP : {{ status.code }}
+                {% if status.code == 200 %}
+                <i class="fas fa-check-circle fa-1x" class="text-red"></i>
+                {% elseif status.code == 404 %}
+                <i class="fas fa-exclamation-triangle fa-1x"></i>
+                {% else %}
+                <i class="fas fa-exclamation-circle fa-1x"></i>
+                {% endif %}
+            </div>
+			<div class="website-card-icon">
+			</div>
+			</div>
+			</div>
+			<div class="card-footer">
+			<a class="btn btn-lg btn-white" href="{{ path('website_view', {
+                'id' : status.website.id
+            }) }}">Voir la fiche</a>&emsp;</td>
+			</div>
+		</div>
+	</div>
+    {% endfor %}
+</div>
+{% endblock %}

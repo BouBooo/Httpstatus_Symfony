@@ -1,0 +1,51 @@
+<style>
+#conteneur
+{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.element {
+	width: 33%;
+	padding: 10px;
+}
+a {
+	color: white;
+}
+</style>
+
+    
+
+<!-- NAV -->
+ <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+        <a class="navbar-brand" href="{{ path('home') }}">Httpstatus</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="./admin">Admin Dashboard</a></li>
+        </ul>
+        {% if app.user %}
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="{{ path('admin_logout') }}">Deconnexion</a></li>
+        </ul>
+        {% else %}
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="{{ path('admin_login') }}">Connexion</a></li>
+        </ul>
+        {% endif %}
+    </div>
+</nav> 
+
+<div class="container">
+{% for label, messages in app.flashes %}
+        <div class="alert alert-{{ label }} alert-dismissible show">
+            {% for message in messages %}
+                {{ message | raw }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            {% endfor %}
+        </div>
+{% endfor %}
+</div>

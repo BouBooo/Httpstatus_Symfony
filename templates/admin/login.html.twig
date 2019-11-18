@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<div class="container-fluid row justify-content-center my-5">
+    <div class="col-md-6">
+        <h1 class="text-center">
+            Connexion
+        </h1>
+        <form action="" method="POST">
+            <div class="form-group">
+                <label for="username">Username :</label>
+                <input type="text" required id="username" class="form-control" placeholder="Mon username" name="_username"/>
+            </div>
+            <div class="form-group">
+                <label for="password">Mot de passe :</label>
+                <input type="password" required id="password" class="form-control" placeholder="Mon password" name="_password"/>
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-user-lock"></i>
+                    Me connecter
+                </button>
+            </div>
+            {% if error %}
+                    <div class="alert alert-danger text-center">
+                        <p>Authentification incorrecte</p>
+                    </div>
+            {% endif %}
+        </form>
+    </div>  
+</div>
+
+
+{% endblock %}
