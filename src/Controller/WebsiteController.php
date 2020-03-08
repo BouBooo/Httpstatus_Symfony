@@ -49,30 +49,6 @@ class WebsiteController extends AbstractController
         return $this->redirectToRoute('home');
     }
 
-    /**
-     * @Route("/websites/test", name="test")
-     */
-    public function test(WebsiteRepository $repo, ObjectManager $manager) {
-        foreach ($repo->findAll() as $key => $site) {
-            $url = $site->getUrl();
-            $handle = curl_init($url);
-            curl_setopt($handle,  CURLOPT_RETURNTRANSFER, TRUE);
-            $response = curl_exec($handle);
-            $code = curl_getinfo($handle, CURLINFO_HTTP_CODE);
-            curl_close($handle);
-
-            $status = new Status();
-            $status->setWebsite($site)
-                    ->setCode($code)
-                    ->setDateReport(new \DateTime());
-            $manager->persist($status);
-        }
-        $manager->flush();
-
-        $this->addFlash('success', 'Votre diagnostic a été effectué avec succès.');
-        return $this->redirectToRoute('admin');
-    }
-
     
     /**
      * @Route("/websites/{id}", name="website_view")
